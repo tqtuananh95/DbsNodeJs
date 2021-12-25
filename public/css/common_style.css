@@ -1,0 +1,26 @@
+#snackbar {
+    display: none;
+    min-width: 300px;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 16px;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    right: 50%;
+    top: 30px;
+    word-wrap: break-word;
+    font-size: 17px;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+
+table tr:not(.home) {
+    cursor: pointer;
+}
+
+.ui-state-hightlight {
+    border: 1px dashed #ccc;
+}

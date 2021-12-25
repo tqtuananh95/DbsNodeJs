@@ -1,0 +1,47 @@
+<%- include('../header'); -%>
+<%- include('../nav_bar'); -%>
+<br>
+<a href="/admin/add" class="btn btn-primary float-right">Add Admin Page</a>
+<br>
+<br>
+<table class="table table-striped">
+    <thead>
+        <tr class="home">
+            <th scope="col">Title</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody class="sortable-list">
+        <% pages.forEach(function(page) { %>
+        <tr id="<%= page._id %>" class="<%= page.slug %>">
+            <td scope="row"><%= page.title %></td>
+            <td scope="row"><a href="/admin/edit_admin/<%= page.slug %>">Edit</a></td>
+            <td scope="row"><a href="/admin/del_admin/<%= page._id %>">Del</a></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>	
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script>
+    $('tbody').sortable({
+        items: "tr:not('.home')",
+        placeholder: "ui-state-hightlight",
+        update: async(event,ui) => {
+            var ids = ui.item[0].id;
+            console.log(ids);
+            var url = "/admin/reorder";
+            $.post(url, {id: ids});
+            // $.ajax({
+            //     type: "POST",
+            //     dataType: "json",
+            //     contentType: "application/json",
+            //     url: url,
+            //     data: JSON.stringify({id: ids}),
+            // });
+        }
+    });
+</script>
+<%- include('../footer'); -%>
