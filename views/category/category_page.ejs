@@ -1,0 +1,57 @@
+<%- include('../fragments/admin_header'); -%>
+<%- include('../fragments/admin_nav_bar'); -%>
+<br>
+<br>
+<% if(message){ %>
+    <div class="<%= message.type %>" role="alert">
+        <strong>Well done!</strong> <%= message.success %>
+    </div>
+<% } %>
+<br>
+<a href="/category/add" class="btn btn-primary float-right">Add Category Page</a>
+<br>
+<br>
+<table class="table table-striped">
+    <thead>
+        <tr class="home">
+            <th scope="col">Title</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody class="sortable-list">
+        <% categories.forEach(function(category) { %>
+        <tr id="<%= category._id %>" class="<%= category.slug %>">
+            <td scope="row"><%= category.title %></td>
+            <td scope="row"><a href="/category/edit/<%= category._id %>">Edit</a></td>
+            <td scope="row"><a class="alink" href="/category/del/<%= category._id %>">Del</a></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>	
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script>
+    $(function() {
+        console.log();
+    })
+    $('tbody').sortable({
+        items: "tr:not('.home')",
+        placeholder: "ui-state-hightlight",
+        // update: async(event,ui) => {
+        //     var ids = ui.item[0].id;
+        //     console.log(ids);
+        //     var url = "/admin/reorder";
+        //     $.post(url, {id: ids});
+        //     // $.ajax({
+        //     //     type: "POST",
+        //     //     dataType: "json",
+        //     //     contentType: "application/json",
+        //     //     url: url,
+        //     //     data: JSON.stringify({id: ids}),
+        //     // });
+        // }
+    });
+</script>
+<%- include('../fragments/admin_footer'); -%>

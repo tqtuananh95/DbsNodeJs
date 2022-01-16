@@ -1,5 +1,12 @@
-<%- include('../header'); -%>
-<%- include('../nav_bar'); -%>
+<%- include('../fragments/admin_header'); -%>
+<%- include('../fragments/admin_nav_bar'); -%>
+<br>
+<br>
+<% if(message){ %>
+    <div class="alert alert-success" role="alert">
+        <strong>Well done!</strong> <%= message.success %>
+    </div>
+<% } %>
 <br>
 <a href="/admin/add" class="btn btn-primary float-right">Add Admin Page</a>
 <br>
@@ -16,21 +23,21 @@
         <% pages.forEach(function(page) { %>
         <tr id="<%= page._id %>" class="<%= page.slug %>">
             <td scope="row"><%= page.title %></td>
-            <td scope="row"><a href="/admin/edit_admin/<%= page.slug %>">Edit</a></td>
-            <td scope="row"><a href="/admin/del_admin/<%= page._id %>">Del</a></td>
+            <td scope="row"><a href="/admin/edit/<%= page._id %>">Edit</a></td>
+            <td scope="row"><a class="alink" href="/admin/del/<%= page._id %>">Del</a></td>
         </tr>
         <% }); %>
     </tbody>
 </table>
-<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>	
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 <script>
     $('tbody').sortable({
         items: "tr:not('.home')",
         placeholder: "ui-state-hightlight",
-        update: async(event,ui) => {
-            var ids = ui.item[0].id;
+        update: function(event,ui) {
+            var ids = [];
+            $("tbody tr").each(function(){
+                ids.push($(this).attr("id"));
+            });
             console.log(ids);
             var url = "/admin/reorder";
             $.post(url, {id: ids});
@@ -44,4 +51,4 @@
         }
     });
 </script>
-<%- include('../footer'); -%>
+<%- include('../fragments/admin_footer'); -%>

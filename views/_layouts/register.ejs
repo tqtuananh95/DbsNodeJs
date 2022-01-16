@@ -1,0 +1,27 @@
+<%- include('../fragments/header'); -%>
+<h1><%= title %></h1>
+<br>
+<form action="/users/register" method="post">
+    <div class="form-group">
+        <label for="">Name</label>
+        <input type="text" class="form-control" name="name" placeholder="Name">
+    </div>
+    <div class="form-group">
+        <label for="">Email</label>
+        <input type="email" class="form-control" name="email" placeholder="Email">
+    </div>
+    <div class="form-group">
+        <label for="">UserName</label>
+        <input type="text" class="form-control" name="username" placeholder="User Name">
+    </div>
+    <div class="form-group">
+        <label for="">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="">Confirm Password</label>
+        <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>
+<%- include('../fragments/footer'); -%>

@@ -1,0 +1,15 @@
+<%- include('../fragments/header'); -%>
+<h1><%= title %></h1>
+<br>
+<form action="/users/login" method="post">
+    <div class="form-group">
+        <label for="">UserName</label>
+        <input type="text" class="form-control" name="username" placeholder="User Name">
+    </div>
+    <div class="form-group">
+        <label for="">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password">
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>
+<%- include('../fragments/footer'); -%>

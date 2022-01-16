@@ -1,0 +1,29 @@
+<%- include('../fragments/admin_header'); -%>
+<%- include('../fragments/admin_nav_bar'); -%>
+<br>
+<ul class="list-group">
+<% if (errors) { %>
+    <% errors.forEach(function(error) { %>
+    <li class="list-group-item list-group-item-danger"><%= error.param %> : <%= error.msg %></li>  
+    <% }); %>
+ <% } %>
+</ul>
+<br>
+<form action="/admin/edit/<%= id %>" method="post">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" name="title" value="<%= title %>">
+    </div>
+    <div class="form-group">
+        <label for="slug">Slug</label>
+        <input type="text" class="form-control" name="slug" value="<%= slug %>">
+    </div>
+    <div class="form-group">
+        <label for="ckedit_text">Content</label><br>
+        <textarea name="content" id="ckedit_text" cols="30" rows="10" class="form-control" required><%= content %></textarea>
+    </div>
+    <input type="hidden" name="id" value="<%= id %>">
+    <button class="btn btn-primary">Submit</button>
+</form>
+<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+<%- include('../fragments/admin_footer'); -%>

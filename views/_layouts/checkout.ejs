@@ -1,0 +1,50 @@
+<%- include('../fragments/header'); -%>
+
+<% if (typeof cart !== "undefined") { %> 
+  <h1 class="page-title">My Cart</h1>
+  <table class="table table-striped alignmiddle">
+    <thead>
+      <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col"></th>
+        <th scope="col">Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% var total = 0; %>
+      <% cart.forEach(function(product) { %>
+        <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+        <% total += + sub; %>
+        <tr>
+          <td scope="row"><img src="<%= product.image %>" alt="" width="100"></td>
+          <td scope="row"><%= product.title %></td>
+          <td scope="row">$<%= parseFloat(product.price).toFixed(2) %></td>
+          <td scope="row"><%= product.qty %></td>
+          <td scope="row">
+            <a href="/cart/checkout/<%= product.title %>?action=add">+</a>&nbsp;
+            <a href="/cart/checkout/<%= product.title %>?action=remove">-</a>&nbsp;
+            <a href="/cart/checkout/<%= product.title %>?action=clear">clear</a>&nbsp;
+          </td>
+          <td scope="row">$<%= sub %></td>
+        </tr>  
+      <% }); %>
+        <tr>
+          <td colspan="6" align="right"><b>Total: </b>$<%= parseFloat(total).toFixed(2) %></td>
+        </tr>
+        <tr>
+          <td colspan="5" align="right">
+            <a class="btn btn-danger alinkclear" href="/cart/clear">Clear Cart</a>
+          </td>
+          <td colspan="1" align="right">
+            <a class="btn btn-primary buynow" href="#">Buy Now</a>
+          </td>
+        </tr>
+    </tbody>
+  </table>  
+<% } else { %>
+  <h3 class="text-center">Your cart is empty.</h3>
+<% } %>
+<%- include('../fragments/footer'); -%>

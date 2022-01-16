@@ -1,0 +1,57 @@
+<%- include('../fragments/admin_header'); -%>
+<%- include('../fragments/admin_nav_bar'); -%>
+<br>
+<br>
+<% if(message){ %>
+    <div class="<%= message.type %>" role="alert">
+        <strong>Well done!</strong> <%= message.success %>
+    </div>
+<% } %>
+<br>
+<a href="/product/add" class="btn btn-primary float-right">Add Product Page</a>
+<br>
+<br>
+<% if (count > 0) { %>
+<table class="table table-striped">
+    <thead>
+        <tr class="home">
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Product Image</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody class="sortable-list">
+        <% products.forEach(function(product) { %>
+        <tr id="<%= product._id %>">
+            <td scope="row"><%= product.title %></td>
+            <td scope="row" class="priceval"><%= product.price %></td>
+            <td scope="row"><%= product.category %></td>
+            <td scope="row">
+                <% if (product.image == "") { %>
+                    <img src="/images/noimage.png" alt="">
+                <% } else { %>
+                    <img src="/product_image/<%= product._id %>/<%= product.image %>" alt="" width="30" height="30">
+                <% } %>
+            </td>
+            <td scope="row"><a href="/product/edit/<%= product._id %>">Edit</a></td>
+            <td scope="row"><a class="alink" href="/product/del/<%= product._id %>">Del</a></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+<% } else { %>
+    <h3 class="text-center">There are no products.</h3>
+<% } %>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script language="Javascript">
+    $(function() {
+        $('.priceval').each(function (i, el) {
+            $(el).text(parseFloat($(el).text()).toFixed(2));
+        });
+    });
+    
+</script>
+<%- include('../fragments/admin_footer'); -%>

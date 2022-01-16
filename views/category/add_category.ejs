@@ -1,0 +1,28 @@
+<%- include('../fragments/admin_header'); -%>
+<%- include('../fragments/admin_nav_bar'); -%>
+<br>
+<ul class="list-group">
+<% if (errors) { %>
+    <% errors.forEach(function(error) { %>
+    <li class="list-group-item list-group-item-danger"><%= error.param %> : <%= error.msg %></li>  
+    <% }); %>
+ <% } %>
+</ul>
+<% if(message){ %>
+    <div class="<%= message.type %>" role="alert">
+        <strong>Well done!</strong> <%= message.success %>
+    </div>
+<% } %>
+<br>
+<form action="/category/add" method="post">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" name="title" value="<%= title %>" required>
+    </div>
+    <div class="form-group">
+        <label for="slug">Slug</label>
+        <input type="text" class="form-control" name="slug" value="<%= slug %>" required>
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>
+<%- include('../fragments/admin_footer'); -%>

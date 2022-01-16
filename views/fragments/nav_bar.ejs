@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <% pages.forEach(function(page) { %>
+        <% if (page.slug == "home") { %>
+          <li class="nav-item">
+            <a class="nav-link active" href="/"><%= page.title %></a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/<%= page.slug %>"><%= page.title %></a>
+          </li>
+        <% } %>
+      <% }); %>
+      <% if (user && user.admin == 1) { %>
+        <li class="nav-item"><a href="/admin" class="nav-link">Admin Area</a></li>
+      <% } %>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <ul class="nav navbar-nav navbar-right pl-4">
+      <li>
+        <a href="/cart/checkout">
+          Cart(
+            <% if (typeof cart !== "undefined") { %>
+              <%= cart.length %>
+              <% } else { %>
+                0
+            <% } %>
+          )
+        </a>
+      </li>&nbsp;&nbsp;
+      <% if (user) { %>
+        <li><a href="/users/logout" class="text-white">Hi, <b><%= user.username %>&nbsp; Logout</b></a></li>
+      <% } else { %>
+        <li><a href="/users/register" class="text-white"><b>Register</b></a></li>
+        <b class="text-white">/</b>
+        <li><a href="/users/login" class="text-white"><b>Login</b></a></li>
+      <% } %>
+    </ul>
+  </div>
+</nav>
